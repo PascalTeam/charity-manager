@@ -69,3 +69,4 @@ Follow the [./PREREQUISITES.md](./PREREQUISITES.md) instructions to configure a 
   _Most of these ideas came from [this document](https://gist.github.com/brianclements/841ea7bffdb01346392c)._
 
 * when ready, create a PR having `main` as a base branch and add reviewers
+* in order for a branch to be merged into `main`, the corresponding PR must be approved by at least one reviewer
