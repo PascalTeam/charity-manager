@@ -12,7 +12,6 @@
 
 Follow the [./PREREQUISITES.md](./PREREQUISITES.md) instructions to configure a local virtual machine with Ubuntu, Docker, IntelliJ.
 
----
 
 ## Access the code
 
@@ -21,8 +20,6 @@ Follow the [./PREREQUISITES.md](./PREREQUISITES.md) instructions to configure a 
 * Clone the code repository:
   * git@github.com:YOUR_ORG_NAME/service.git
 
-
----
 
 ## Run/debug code in IntelliJ
 * Build the code
@@ -36,8 +33,6 @@ Follow the [./PREREQUISITES.md](./PREREQUISITES.md) instructions to configure a 
 * Open in your browser:
     * http://localhost:8080/hello-world
     * http://localhost:8080/info
-
----
 
 ## Deploy and run the code locally as docker instance
 
@@ -59,8 +54,6 @@ Follow the [./PREREQUISITES.md](./PREREQUISITES.md) instructions to configure a 
     * http://localhost:8080/info
 * You can access the MongoDB Admin UI at:
   * http://localhost:8090 
-
----
 
 ## Code Conventions
 
