@@ -1,5 +1,7 @@
 package ro.unibuc.hello.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +21,9 @@ public class CharityEventService {
       charityData.location,
       charityData.date
     );
-    
+
+    newCharity.setDonees(new ArrayList<>());
+
     charityEventRepository.insert(newCharity);
   }
 }
