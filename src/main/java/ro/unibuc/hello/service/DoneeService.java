@@ -3,6 +3,7 @@ package ro.unibuc.hello.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,9 @@ public class DoneeService {
           d.lastName,
           d.age
         );
+
+        var id = new ObjectId();
+        doneeEntity.setId(id.toString());
         
         return doneeEntity;
       })

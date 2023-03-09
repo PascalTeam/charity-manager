@@ -19,11 +19,14 @@ public class DoneeEntity {
   public DoneeEntity(
       String firstName,
       String lastName,
-      int age
-    ) {
+      int age) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   @Override
