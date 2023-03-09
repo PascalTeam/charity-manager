@@ -24,7 +24,7 @@ public class CharityEventController {
 
   @PostMapping
   @ResponseBody
-  public ResponseEntity<Response> createCharity (@RequestBody CreateCharityDTO charityData) {
+  public ResponseEntity<Response<?>> createCharity (@RequestBody CreateCharityDTO charityData) {
     charityEventService.createCharityEvent(charityData);
     
     return ResponseEntity.status(HttpStatus.CREATED).body(new Response<>("Charity event successfully created", null));
