@@ -23,7 +23,7 @@ public class DoneeController {
 
   @PostMapping("/{charityId}")
   @ResponseBody
-  public ResponseEntity<Response> addDoneesToCharity(@PathVariable String charityId, @RequestBody AddDoneesDTO doneesDTO) {
+  public ResponseEntity<Response<?>> addDoneesToCharity(@PathVariable String charityId, @RequestBody AddDoneesDTO doneesDTO) {
     doneeService.addDoneesToCharity(charityId, doneesDTO.donees);
     
     return ResponseEntity.status(HttpStatus.CREATED).body(new Response<>("Donees successfully added to the charity event.", null));
