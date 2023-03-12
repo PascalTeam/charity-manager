@@ -12,7 +12,7 @@ import ro.unibuc.hello.data.CharityEventRepository;
 import ro.unibuc.hello.data.DoneeEntity;
 import ro.unibuc.hello.dto.DoneeDTO;
 
-@Component
+@Service
 public class DoneeService {
   @Autowired
   private CharityEventRepository charityEventRepository;
