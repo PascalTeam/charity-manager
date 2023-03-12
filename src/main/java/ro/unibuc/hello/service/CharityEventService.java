@@ -7,6 +7,8 @@ import ro.unibuc.hello.data.CharityEventEntity;
 import ro.unibuc.hello.data.CharityEventRepository;
 import ro.unibuc.hello.dto.CreateCharityDTO;
 
+import java.util.ArrayList;
+
 @Component
 public class CharityEventService {
 
@@ -19,6 +21,8 @@ public class CharityEventService {
       charityData.location,
       charityData.date
     );
+
+    newCharity.setProducts(new ArrayList<>());
     
     charityEventRepository.insert(newCharity);
   }
