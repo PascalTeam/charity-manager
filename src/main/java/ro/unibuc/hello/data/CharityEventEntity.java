@@ -12,6 +12,7 @@ public class CharityEventEntity {
   public String location;
   public String date;
 
+  public List<DoneeEntity> donees;
   public List<ProductEntity> products;
 
   public CharityEventEntity() {
@@ -28,6 +29,10 @@ public class CharityEventEntity {
     return String.format(
         "CharityEvent[id='%s', name='%s', location='%s', date='%s']",
         id, name, location, date);
+  }
+
+  public void setDonees(List<DoneeEntity> donees) {
+    this.donees = donees;
   }
 
   public void setProducts(List<ProductEntity> products) {
