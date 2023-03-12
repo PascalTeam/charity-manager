@@ -19,7 +19,9 @@ public class DoneeService {
   
   public void addDoneesToCharity (String charityId, List<DoneeDTO> donees) {
     var charity = charityEventRepository.findById(charityId);
-    if (charity.isPresent()) {
+    if (!charity.isPresent()) {
+      return;
+    }
       var doneesEntities = donees.stream().map(d -> {
         var doneeEntity = new DoneeEntity(
           d.firstName,
