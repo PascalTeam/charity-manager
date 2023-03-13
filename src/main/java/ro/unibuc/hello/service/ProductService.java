@@ -38,7 +38,9 @@ public class ProductService {
   }
 
   public List<ProductDTO> getProductsForCharity(String charityId) {
-    // TODO
-    return null;
+    var charity = charityEventRepository.findById(charityId);
+    return charity.map(charityEventEntity -> charityEventEntity.products.stream()
+        .map(productEntity -> new ProductDTO(productEntity.name, productEntity.quantity))
+        .collect(Collectors.toList())).orElse(null);
   }
 }
