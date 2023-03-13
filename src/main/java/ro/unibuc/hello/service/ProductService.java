@@ -36,4 +36,8 @@ public class ProductService {
 
     charityEventRepository.save(charity.get());
   }
+
+  public void deleteProductFromCharity(String charityId, String productId) {
+    // TODO
+  }
 }
