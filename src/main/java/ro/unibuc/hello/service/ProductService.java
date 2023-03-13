@@ -38,6 +38,13 @@ public class ProductService {
   }
 
   public void deleteProductFromCharity(String charityId, String productId) {
-    // TODO
+    var charity = charityEventRepository.findById(charityId);
+    if (charity.isEmpty()) {
+      return;
+    }
+
+    charity.get().products.removeIf(product -> product.id.equals(productId));
+
+    charityEventRepository.save(charity.get());
   }
 }
