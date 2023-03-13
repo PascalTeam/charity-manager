@@ -12,22 +12,22 @@ import ro.unibuc.hello.dto.Greeting;
 @Tag("IT")
 class HelloWorldServiceTestIT {
 
-    @Autowired
-    InformationRepository informationRepository;
+  @Autowired
+  InformationRepository informationRepository;
 
-    @Autowired
-    HelloWorldService helloWorldService;
+  @Autowired
+  HelloWorldService helloWorldService;
 
-    @Test
-    void test_buildGreetingFromInfo_returnsGreetingWithInformation() {
-        // Arrange
-        String title = "Overview";
+  @Test
+  void test_buildGreetingFromInfo_returnsGreetingWithInformation() {
+    // Arrange
+    String title = "Overview";
 
-        // Act
-        Greeting greeting = helloWorldService.buildGreetingFromInfo(title);
+    // Act
+    Greeting greeting = helloWorldService.buildGreetingFromInfo(title);
 
-        // Assert
-        Assertions.assertEquals(1, greeting.getId());
-        Assertions.assertEquals("Overview : This is an example of using a data storage engine running separately from our applications server!", greeting.getContent());
-    }
+    // Assert
+    Assertions.assertEquals(1, greeting.getId());
+    Assertions.assertEquals("Overview : This is an example of using a data storage engine running separately from our applications server!", greeting.getContent());
+  }
 }

@@ -1,9 +1,9 @@
 package ro.unibuc.hello.data;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * No need to implement this interface.
@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InformationRepository extends MongoRepository<InformationEntity, String> {
 
-    InformationEntity findByTitle(String title);
-    List<InformationEntity> findByDescription(String description);
+  InformationEntity findByTitle(String title);
+
+  List<InformationEntity> findByDescription(String description);
 
 }
