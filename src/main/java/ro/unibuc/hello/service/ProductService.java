@@ -36,4 +36,9 @@ public class ProductService {
 
     charityEventRepository.save(charity.get());
   }
+
+  public List<ProductDTO> getProductsForCharity(String charityId) {
+    // TODO
+    return null;
+  }
 }
