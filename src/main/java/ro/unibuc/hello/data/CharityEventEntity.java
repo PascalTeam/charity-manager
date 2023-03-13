@@ -1,8 +1,8 @@
 package ro.unibuc.hello.data;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 public class CharityEventEntity {
   @Id
@@ -13,6 +13,7 @@ public class CharityEventEntity {
   public String date;
 
   public List<DoneeEntity> donees;
+  public List<ProductEntity> products;
 
   public CharityEventEntity() {
   }
@@ -32,5 +33,9 @@ public class CharityEventEntity {
 
   public void setDonees(List<DoneeEntity> donees) {
     this.donees = donees;
+  }
+
+  public void setProducts(List<ProductEntity> products) {
+    this.products = products;
   }
 }

@@ -14,7 +14,7 @@ public class DoneeDTO {
       @JsonProperty("firstName") String firstName,
       @JsonProperty("lastName") String lastName,
       @JsonProperty("age") int age
-    ) {
+  ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;

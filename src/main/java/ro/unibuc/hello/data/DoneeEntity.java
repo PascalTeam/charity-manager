@@ -2,9 +2,6 @@ package ro.unibuc.hello.data;
 
 import org.springframework.data.annotation.Id;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class DoneeEntity {
   @Id
   public String id;

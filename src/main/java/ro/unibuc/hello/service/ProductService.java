@@ -4,38 +4,35 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.unibuc.hello.data.CharityEventRepository;
-import ro.unibuc.hello.data.DoneeEntity;
-import ro.unibuc.hello.dto.DoneeDTO;
+import ro.unibuc.hello.data.ProductEntity;
+import ro.unibuc.hello.dto.ProductDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DoneeService {
+public class ProductService {
   @Autowired
   private CharityEventRepository charityEventRepository;
 
-  public void addDoneesToCharity(String charityId, List<DoneeDTO> donees) {
+  public void addProductsToCharity(String charityId, List<ProductDTO> products) {
     var charity = charityEventRepository.findById(charityId);
-    if (!charity.isPresent()) {
+    if (charity.isEmpty()) {
       return;
     }
 
-    var doneesEntities = donees.stream().map(d -> {
-          var doneeEntity = new DoneeEntity(
-              d.firstName,
-              d.lastName,
-              d.age
-          );
+    var productEntities = products.stream()
+        .map(productDTO -> {
+          var productEntity = new ProductEntity(productDTO.name, productDTO.quantity);
 
           var id = new ObjectId();
-          doneeEntity.setId(id.toString());
+          productEntity.setId(id.toString());
 
-          return doneeEntity;
+          return productEntity;
         })
         .collect(Collectors.toList());
 
-    charity.get().donees.addAll(doneesEntities);
+    charity.get().products.addAll(productEntities);
 
     charityEventRepository.save(charity.get());
   }

@@ -5,16 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class AddDoneesDTO {
-  public List<DoneeDTO> donees;
+public class AddProductsDTO {
+  public List<ProductDTO> products;
 
   @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-  public AddDoneesDTO(@JsonProperty("donees") List<DoneeDTO> donees) {
-    this.donees = donees;
+  public AddProductsDTO(@JsonProperty("products") List<ProductDTO> products) {
+    this.products = products;
   }
 
   @Override
   public String toString() {
-    return donees.toString();
+    return products.toString();
   }
 }
