@@ -7,6 +7,7 @@ import ro.unibuc.hello.data.CharityEventRepository;
 import ro.unibuc.hello.data.DoneeEntity;
 import ro.unibuc.hello.dto.DoneeDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,5 +39,14 @@ public class DoneeService {
     charity.get().donees.addAll(doneesEntities);
 
     charityEventRepository.save(charity.get());
+  }
+
+  public List<DoneeEntity> getDoneesFromCharity(String charityId) {
+    var charity = charityEventRepository.findById(charityId);
+    if (!charity.isPresent()) {
+      return new ArrayList<>();
+    }
+
+    return charity.get().donees;
   }
 }
