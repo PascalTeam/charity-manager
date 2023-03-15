@@ -29,5 +29,13 @@ public class ProductController {
     productService.deleteProductFromCharity(charityId, productId);
 
     return ResponseEntity.status(HttpStatus.OK).body(new Response<>("Product successfully deleted from the charity event.", null));
+}
+
+  @GetMapping("/{charityId}")
+  @ResponseBody
+  public ResponseEntity<Response<?>> getProductsForCharity(@PathVariable String charityId) {
+    var products = productService.getProductsForCharity(charityId);
+
+    return ResponseEntity.status(HttpStatus.OK).body(new Response<>("Products successfully retrieved.", products));
   }
 }
