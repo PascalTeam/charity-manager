@@ -14,6 +14,7 @@ public class CharityEventEntity {
 
   public List<DoneeEntity> donees;
   public List<ProductEntity> products;
+  public List<DoneeProductsEntity> doneesProducts;
 
   public CharityEventEntity() {
   }
@@ -37,5 +38,9 @@ public class CharityEventEntity {
 
   public void setProducts(List<ProductEntity> products) {
     this.products = products;
+  }
+
+  public void setDoneesProducts(List<DoneeProductsEntity> doneesProducts) {
+    this.doneesProducts = doneesProducts;
   }
 }
