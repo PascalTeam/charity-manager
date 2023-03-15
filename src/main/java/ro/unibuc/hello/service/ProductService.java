@@ -37,6 +37,17 @@ public class ProductService {
     charityEventRepository.save(charity.get());
   }
 
+  public void deleteProductFromCharity(String charityId, String productId) {
+    var charity = charityEventRepository.findById(charityId);
+    if (charity.isEmpty()) {
+      return;
+    }
+
+    charity.get().products.removeIf(product -> product.id.equals(productId));
+
+    charityEventRepository.save(charity.get());
+}
+
   public List<ProductDTO> getProductsForCharity(String charityId) {
     var charity = charityEventRepository.findById(charityId);
     return charity.map(charityEventEntity -> charityEventEntity.products.stream()
