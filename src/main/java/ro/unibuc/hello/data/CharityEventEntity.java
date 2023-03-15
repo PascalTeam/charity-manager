@@ -43,4 +43,9 @@ public class CharityEventEntity {
   public void setDoneesProducts(List<DoneeProductsEntity> doneesProducts) {
     this.doneesProducts = doneesProducts;
   }
+
+  public String getId() {
+    return id;
+
+  }
 }

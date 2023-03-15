@@ -16,28 +16,26 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-
 @Component
 public class CharityEventService {
 
   @Autowired
   private CharityEventRepository charityEventRepository;
 
-  public void createCharityEvent(CreateCharityDTO charityData) {
+  public CharityEventEntity createCharityEvent(CreateCharityDTO charityData) {
     var newCharity = new CharityEventEntity(
         charityData.name,
         charityData.location,
         charityData.date);
-        
+
     newCharity.setDonees(new ArrayList<>());
     newCharity.setProducts(new ArrayList<>());
     newCharity.setDoneesProducts(new ArrayList<>());
 
-    charityEventRepository.insert(newCharity);
+    return charityEventRepository.insert(newCharity);
   }
 
-
-  public List<CharityEventEntity> getCharityEvents () {
+  public List<CharityEventEntity> getCharityEvents() {
     return charityEventRepository.findAll();
   }
 
@@ -49,15 +47,15 @@ public class CharityEventService {
     }
 
     var products = productsDoneeDTO.products.stream()
-      .map(p -> {
-        var doneeProduct = new DoneeProductEntity(p.productId, p.quantity);
-        return doneeProduct;
-      }).collect(Collectors.toList());
-  
+        .map(p -> {
+          var doneeProduct = new DoneeProductEntity(p.productId, p.quantity);
+          return doneeProduct;
+        }).collect(Collectors.toList());
+
     var donneProductsEntity = new DoneeProductsEntity(
         productsDoneeDTO.doneeId,
         products);
-    
+
     charity.get().doneesProducts.removeIf(dp -> dp.doneeId == productsDoneeDTO.doneeId);
     charity.get().doneesProducts.add(donneProductsEntity);
 
