@@ -23,17 +23,16 @@ public class DoneeService {
     }
 
     var doneesEntities = donees.stream().map(d -> {
-          var doneeEntity = new DoneeEntity(
-              d.firstName,
-              d.lastName,
-              d.age
-          );
+      var doneeEntity = new DoneeEntity(
+          d.firstName,
+          d.lastName,
+          d.age);
 
-          var id = new ObjectId();
-          doneeEntity.setId(id.toString());
+      var id = new ObjectId();
+      doneeEntity.setId(id.toString());
 
-          return doneeEntity;
-        })
+      return doneeEntity;
+    })
         .collect(Collectors.toList());
 
     charity.get().donees.addAll(doneesEntities);
@@ -48,5 +47,39 @@ public class DoneeService {
     }
 
     return charity.get().donees;
+  }
+
+  public DoneeEntity getDoneeFromCharity(String charityId, String doneeId) {
+
+    var charity = charityEventRepository.findById(charityId);
+    if (!charity.isPresent()) {
+      return null;
+    }
+
+    return charity.get().donees.stream()
+        .filter(donee -> donee.id.equals(doneeId))
+        .findFirst()
+        .orElse(null);
+
+  }
+
+  public void updateDoneeFromCharity(String charityId, String doneeId, DoneeDTO donee) {
+    var charity = charityEventRepository.findById(charityId);
+    if (!charity.isPresent()) {
+      return;
+    }
+
+    var doneeEntity = charity.get().donees.stream()
+        .filter(d -> d.id.equals(doneeId))
+        .findFirst();
+
+    if (doneeEntity.isPresent()) {
+      doneeEntity.get().firstName = donee.firstName;
+      doneeEntity.get().lastName = donee.lastName;
+      doneeEntity.get().age = donee.age;
+      charityEventRepository.save(charity.get());
+
+    }
+
   }
 }
