@@ -10,8 +10,12 @@ import ro.unibuc.hello.dto.AssignProductsDoneeDTO;
 import ro.unibuc.hello.dto.CreateCharityDTO;
 
 import java.util.ArrayList;
+
+import java.util.List;
+
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 
 @Component
 public class CharityEventService {
@@ -24,12 +28,17 @@ public class CharityEventService {
         charityData.name,
         charityData.location,
         charityData.date);
-
+        
     newCharity.setDonees(new ArrayList<>());
     newCharity.setProducts(new ArrayList<>());
     newCharity.setDoneesProducts(new ArrayList<>());
 
     charityEventRepository.insert(newCharity);
+  }
+
+
+  public List<CharityEventEntity> getCharityEvents () {
+    return charityEventRepository.findAll();
   }
 
   // Returning boolean until we decide to handle errors properly.
