@@ -58,4 +58,17 @@ public class CharityEventController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(new Response<>("An error occurred while adding the products to the donee", null));
   }
+
+  @GetMapping("/{charityId}/donee/{doneeId}/products")
+  public ResponseEntity<Response<?>> assignProductsToDonee(@PathVariable String charityId, @PathVariable String doneeId) {
+    var products = charityEventService.getDoneeProducts(charityId, doneeId);
+    if (products.isPresent()) {
+      return ResponseEntity.status(HttpStatus.CREATED)
+          .body(new Response<>("The donee's products have been successfully fetched.", products.get()));
+    }
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(new Response<>("An error occurred while fetching the donee's product", null));
+  }
+
 }
