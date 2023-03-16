@@ -33,6 +33,14 @@ public class CharityEventController {
   @Autowired
   private CharityEventService charityEventService;
 
+  @GetMapping
+  @ResponseBody
+  public ResponseEntity<Response<?>> getCharities() {
+    var charities = charityEventService.getCharityEvents();
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(new Response<>("Charity events successfully fetched", charities));
+  }
+
   @PostMapping
   @ResponseBody
   public ResponseEntity<Response<?>> createCharity(@RequestBody CreateCharityDTO charityData) {
@@ -60,7 +68,8 @@ public class CharityEventController {
   }
 
   @GetMapping("/{charityId}/donee/{doneeId}/products")
-  public ResponseEntity<Response<?>> assignProductsToDonee(@PathVariable String charityId, @PathVariable String doneeId) {
+  public ResponseEntity<Response<?>> assignProductsToDonee(@PathVariable String charityId,
+      @PathVariable String doneeId) {
     var products = charityEventService.getDoneeProducts(charityId, doneeId);
     if (products.isPresent()) {
       return ResponseEntity.status(HttpStatus.CREATED)
