@@ -1,5 +1,6 @@
 package ro.unibuc.hello.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import ro.unibuc.hello.data.CharityEventEntity;
 
 import ro.unibuc.hello.dto.AssignProductsDoneeDTO;
@@ -36,9 +36,13 @@ public class CharityEventController {
   @PostMapping
   @ResponseBody
   public ResponseEntity<Response<?>> createCharity(@RequestBody CreateCharityDTO charityData) {
-    charityEventService.createCharityEvent(charityData);
+    var charityEvent = charityEventService.createCharityEvent(charityData);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(new Response<>("Charity event successfully created", null));
+    var responseBody = new HashMap<String, String>();
+    responseBody.put("id", charityEvent.getId());
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(new Response<>("Charity event successfully created", responseBody));
   }
 
   @PutMapping("/{charityId}")
