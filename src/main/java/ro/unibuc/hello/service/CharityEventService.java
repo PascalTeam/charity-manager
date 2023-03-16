@@ -6,13 +6,14 @@ import ro.unibuc.hello.data.CharityEventEntity;
 import ro.unibuc.hello.data.CharityEventRepository;
 import ro.unibuc.hello.data.DoneeProductEntity;
 import ro.unibuc.hello.data.DoneeProductsEntity;
+import ro.unibuc.hello.data.ProductEntity;
 import ro.unibuc.hello.dto.AssignProductsDoneeDTO;
 import ro.unibuc.hello.dto.CreateCharityDTO;
 
 import java.util.ArrayList;
 
 import java.util.List;
-
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -62,5 +63,29 @@ public class CharityEventService {
     charityEventRepository.save(charity.get());
 
     return true;
+  }
+
+  public Optional<List<ProductEntity> > getDoneeProducts(String charityId, String doneeId) {
+    var charity = charityEventRepository.findById(charityId);
+    if (!charity.isPresent()) {
+      return Optional.of(null);
+    }
+
+    var charityEntity = charity.get();
+
+    var doneeProducts = charityEntity.doneesProducts.stream()
+      .filter(dp -> dp.doneeId.equals(doneeId))
+      .findFirst();
+    if (!doneeProducts.isPresent()) {
+      return Optional.of(null);
+    }
+
+    var res = charityEntity.products.stream()
+      .filter(p -> {
+        return doneeProducts.stream().filter(dp -> dp.doneeId == p.id).findFirst() != null;
+      })
+      .collect(Collectors.toList());
+
+    return Optional.of(res);
   }
 }
