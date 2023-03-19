@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'org.asciidoctor.convert' version '1.5.8'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'ro.unibuc'
@@ -51,6 +52,17 @@ test {
 	outputs.dir snippetsDir
 	useJUnitPlatform {
 		excludeTags ("IT", "E2E")
+	}
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
 	}
 }
 
