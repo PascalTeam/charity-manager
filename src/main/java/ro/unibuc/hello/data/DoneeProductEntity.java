@@ -8,4 +8,12 @@ public class DoneeProductEntity {
     this.productId = productId;
     this.quantity = quantity;
   }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public int getQuantity() {
+    return quantity;
+  }
 }
