@@ -17,6 +17,12 @@ public class ProductEntity {
     this.quantity = quantity;
   }
 
+  public ProductEntity(String id, String name, int quantity) {
+    this.id = id;
+    this.name = name;
+    this.quantity = quantity;
+  }
+
   public void setId(String id) {
     this.id = id;
   }
@@ -25,7 +31,6 @@ public class ProductEntity {
   public String toString() {
     return String.format(
         "Product[id=%s, name='%s', quantity='%s']",
-        id, name, quantity
-    );
+        id, name, quantity);
   }
 }

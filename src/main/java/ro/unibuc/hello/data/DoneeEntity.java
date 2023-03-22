@@ -22,6 +22,17 @@ public class DoneeEntity {
     this.age = age;
   }
 
+  public DoneeEntity(
+      String id,
+      String firstName,
+      String lastName,
+      int age) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
   public void setId(String id) {
     this.id = id;
   }
