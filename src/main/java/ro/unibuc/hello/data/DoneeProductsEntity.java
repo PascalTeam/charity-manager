@@ -13,4 +13,13 @@ public class DoneeProductsEntity {
     this.doneeId = doneeId;
     this.products = products;
   }
+
+  public String getDoneeId() {
+    return doneeId;
+  }
+
+  public List<DoneeProductEntity> getProducts() {
+    return products;
+  }
+
 }
