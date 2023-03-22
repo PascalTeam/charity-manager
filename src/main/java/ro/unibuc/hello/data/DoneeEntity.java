@@ -43,4 +43,20 @@ public class DoneeEntity {
         "Donee[id='%s', firstName='%s', lastName='%s', age='%s']",
         id, firstName, lastName, age);
   }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public int getAge() {
+    return age;
+  }
 }

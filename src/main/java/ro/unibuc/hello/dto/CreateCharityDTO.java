@@ -9,7 +9,8 @@ public class CreateCharityDTO {
   public String date;
 
   @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-  public CreateCharityDTO(@JsonProperty("name") String name, @JsonProperty("location") String location, @JsonProperty("date") String date) {
+  public CreateCharityDTO(@JsonProperty("name") String name, @JsonProperty("location") String location,
+      @JsonProperty("date") String date) {
     this.name = name;
     this.location = location;
     this.date = date;
@@ -18,5 +19,17 @@ public class CreateCharityDTO {
   @Override
   public String toString() {
     return String.format("CreateCharity[name=%s, location=%s, date=%s]", name, location, date);
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public String getDate() {
+    return date;
   }
 }
