@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ro.unibuc.hello.data.CharityEventEntity;
 import ro.unibuc.hello.data.CharityEventRepository;
 import ro.unibuc.hello.data.ProductEntity;
+import ro.unibuc.hello.dto.ProductDTO;
 
 @SpringBootTest
 @Tag("IT")
@@ -97,5 +98,28 @@ public class ProductServiceTestIT {
     charityEventRepository.save(charity);
     productsCount = productService.getProductsForCharity(charityId).size();
     Assertions.assertSame(4, productsCount);
+  }
+
+  @Test
+  void test_update_product() {
+    String charityId = charity.getId();
+    String productId = productEntities.get(0).id;
+
+    var productEntity = charity.products.stream()
+        .filter(product -> product.id.equals(productId))
+        .findFirst();
+    Assertions.assertTrue(productEntity.isPresent());
+    Assertions.assertEquals("product #1", productEntity.get().name);
+    Assertions.assertSame(6, productEntity.get().quantity);
+
+    var updatedProduct = new ProductDTO("updatedName", 10);
+    productService.updateProductForCharity(charityId, productId, updatedProduct);
+
+    productEntity = charityEventRepository.findById(charityId).get().products.stream()
+        .filter(product -> product.id.equals(productId))
+        .findFirst();
+    Assertions.assertTrue(productEntity.isPresent());
+    Assertions.assertEquals("updatedName", productEntity.get().name);
+    Assertions.assertSame(10, productEntity.get().quantity);
   }
 }
