@@ -80,4 +80,22 @@ public class ProductServiceTestIT {
     productsCount = productService.getProductsForCharity(charityId).size();
     Assertions.assertSame(3, productsCount);
   }
+
+  @Test
+  void test_get_products() {
+    String charityId = charity.getId();
+
+    var productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4, productsCount);
+
+    charity.products.add(productEntities.get(1));
+    charityEventRepository.save(charity);
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(5, productsCount);
+
+    charity.products.remove(0);
+    charityEventRepository.save(charity);
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4, productsCount);
+  }
 }
