@@ -63,4 +63,21 @@ public class ProductServiceTestIT {
     charityEventRepository.deleteAll();
   }
 
+  @Test
+  void test_delete_product() {
+    String charityId = charity.getId();
+    String productId = productEntities.get(0).id;
+
+    var productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4, productsCount);
+
+    productService.deleteProductFromCharity(charityId, productId);
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(3, productsCount);
+
+    String randomProductId = "randomProductId";
+    productService.deleteProductFromCharity(charityId, randomProductId);
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(3, productsCount);
+  }
 }
