@@ -122,4 +122,30 @@ public class ProductServiceTestIT {
     Assertions.assertEquals("updatedName", productEntity.get().name);
     Assertions.assertSame(10, productEntity.get().quantity);
   }
+
+  @Test
+  void test_add_products() {
+    String charityId = charity.getId();
+
+    var productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4, productsCount);
+
+    List<ProductDTO> productDTOs = new ArrayList<>();
+    IntStream.range(1, 5)
+        .forEach(i -> {
+          var productDTO = new ProductDTO(
+              String.format("product-new #%s", i),
+              i + 5);
+
+          productDTOs.add(productDTO);
+        });
+    productService.addProductsToCharity(charityId, productDTOs);
+
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4 + productDTOs.size(), productsCount);
+
+    productService.addProductsToCharity("charityIdThatDoesNotExist", productDTOs);
+    productsCount = productService.getProductsForCharity(charityId).size();
+    Assertions.assertSame(4 + productDTOs.size(), productsCount);
+  }
 }
