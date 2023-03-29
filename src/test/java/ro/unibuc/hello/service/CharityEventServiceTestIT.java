@@ -63,4 +63,11 @@ public class CharityEventServiceTestIT {
     Assertions.assertEquals(createCharityDTO.getLocation(), charity.location);
     Assertions.assertEquals(createCharityDTO.getDate(), charity.date);
   }
+
+  @Test
+  void test_getCharityEvent(){
+    List<CharityEventEntity> charityEvents = charityEventService.getCharityEvents();
+
+    Assertions.assertFalse(charityEvents.isEmpty());
+  }
 }
