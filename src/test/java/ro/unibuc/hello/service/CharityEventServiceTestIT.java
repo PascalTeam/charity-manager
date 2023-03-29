@@ -26,13 +26,13 @@ public class CharityEventServiceTestIT {
   @Autowired
   CharityEventRepository charityEventRepository;
 
-  CharityEventEntity charity;
-  List<ProductEntity> products = new ArrayList<>();
+  CharityEventEntity charityEventEntity;
+  List<ProductEntity> productEntities = new ArrayList<>();
 
   @BeforeEach
   public void init() {
     var charityDTO = new CreateCharityDTO("Name", "Location", "29/03/2023");
-    charity = charityEventService.createCharityEvent(charityDTO);
+    charityEventEntity = charityEventService.createCharityEvent(charityDTO);
 
     // Add products to the charity event
     IntStream.range(1, 5)
@@ -42,10 +42,10 @@ public class CharityEventServiceTestIT {
           var id = new ObjectId();
           product.setId(id.toString());
 
-          products.add(product);
+          productEntities.add(product);
         });
-    charity.setProducts(products);
-    charityEventRepository.save(charity);
+    charityEventEntity.setProducts(productEntities);
+    charityEventRepository.save(charityEventEntity);
   }
 
   @AfterEach
@@ -55,13 +55,10 @@ public class CharityEventServiceTestIT {
 
   @Test
   void test_createCharityEvent() {
-    // Arrange
     var createCharityDTO = new CreateCharityDTO("Test Name", "Test Location", "25/05/2025");
 
-    // Act
     var charity = charityEventService.createCharityEvent(createCharityDTO);
 
-    // Assert
     Assertions.assertNotNull(charity);
     Assertions.assertEquals(createCharityDTO.getName(), charity.name);
     Assertions.assertEquals(createCharityDTO.getLocation(), charity.location);
@@ -77,10 +74,10 @@ public class CharityEventServiceTestIT {
 
   @Test
   void test_assignProductsToDonee() {
-    var charityId = charity.getId();
+    var charityId = charityEventEntity.getId();
     var DONEE_ID = "ID";
 
-    var productsToAssign = products.stream()
+    var productsToAssign = productEntities.stream()
         .map(p -> new DoneeProductDTO(p.id, p.quantity))
         .collect(Collectors.toList());
     AssignProductsDoneeDTO assignProductsDoneeDTO = new AssignProductsDoneeDTO(DONEE_ID, productsToAssign);
