@@ -1,9 +1,7 @@
 package ro.unibuc.hello.service;
 
 import org.bson.types.ObjectId;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ro.unibuc.hello.data.CharityEventEntity;
@@ -49,5 +47,20 @@ public class CharityEventServiceTestIT {
   @AfterEach
   public void teardown() {
     charityEventRepository.deleteAll();
+  }
+
+  @Test
+  void test_createCharityEvent() {
+    // Arrange
+    var createCharityDTO = new CreateCharityDTO("Test Name", "Test Location", "25/05/2025");
+
+    // Act
+    var charity = charityEventService.createCharityEvent(createCharityDTO);
+
+    // Assert
+    Assertions.assertNotNull(charity);
+    Assertions.assertEquals(createCharityDTO.getName(), charity.name);
+    Assertions.assertEquals(createCharityDTO.getLocation(), charity.location);
+    Assertions.assertEquals(createCharityDTO.getDate(), charity.date);
   }
 }
