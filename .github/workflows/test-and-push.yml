@@ -31,6 +31,11 @@ jobs:
         with:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_PASSWORD }}
+
+      - uses: actions-ecosystem/action-get-merged-pull-request@v1
+        id: get-merged-pull-request
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       
       - uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
