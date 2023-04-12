@@ -31,3 +31,8 @@ jobs:
         with:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t andreigatej/charity-manager:foobar .
+          docker push andreigatej/charity-manager:foobar
