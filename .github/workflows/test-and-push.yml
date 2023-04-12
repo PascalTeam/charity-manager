@@ -26,6 +26,9 @@ jobs:
         with:
           arguments: build
 
+      - name: Set up database
+        run: docker compose up -d
+
       - name: Run Integration Tests
         run: ./gradlew testIT
 
