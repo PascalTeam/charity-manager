@@ -31,8 +31,22 @@ jobs:
         with:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_PASSWORD }}
+      
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: minor
+
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.bump-semver.outputs.new_version }}
+          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
 
       - name: Build and push Docker image
         run: |
-          docker build -t andreigatej/charity-manager:foobar .
-          docker push andreigatej/charity-manager:foobar
+          docker build -t ${{ secrets.DH_USERNAME }}/charity-manager:${{ steps.bump-semver.outputs.new_version }} .
+          docker push ${{ secrets.DH_USERNAME }}/charity-manager:${{ steps.bump-semver.outputs.new_version }}
